@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #1e40af;
+  --color-primary-dark: #1e3a8a;
+  --color-primary-darker: #172554;
+  --color-primary-medium: #2563eb;
+  --color-primary-light: #3b82f6;
+  --color-accent: #0ea5e9;
+  --color-accent-light: #38bdf8;
+  --color-surface-dark: #0f172a;
+  --color-surface-medium: #1e293b;
+  --color-surface-light: #eff6ff;
+  --color-surface-lighter: #f0f9ff;
+  --color-text-on-dark: #e2e8f0;
+  --color-text-muted: #64748b;
+  --color-border-light: #bfdbfe;
+  --gradient-hero: linear-gradient(135deg, #1e3a8a 0%, #1e40af 30%, #2563eb 60%, #0ea5e9 100%);
+  --gradient-card: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  --gradient-sidebar: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  --gradient-progress: linear-gradient(90deg, #2563eb 0%, #0ea5e9 100%);
+  --gradient-button: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  --shadow-card: 0 4px 6px -1px rgba(30, 64, 175, 0.1), 0 2px 4px -2px rgba(30, 64, 175, 0.1);
+  --shadow-card-hover: 0 10px 25px -5px rgba(30, 64, 175, 0.2), 0 4px 10px -6px rgba(30, 64, 175, 0.15);
+  --shadow-elevated: 0 20px 40px -10px rgba(30, 64, 175, 0.25);
+}
+
+@layer base {
+  html,
+  body {
+    @apply bg-slate-50 text-slate-800 antialiased;
+  }
+}
+
+/* Image Atlas Grid */
+.image-atlas-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .image-atlas-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+}
+
+.image-atlas-card {
+  border-radius: 0.75rem;
+  border: 2px solid #bfdbfe;
+  overflow: hidden;
+}
+
+.image-atlas-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Print styles */
+@media print {
+  /* Hide non-essential elements */
+  nav,
+  aside,
+  .print\:hidden,
+  [class*="fixed"],
+  button:not(.print-show),
+  .progress-bar {
+    display: none !important;
+  }
+
+  /* Show hidden print elements */
+  .print\:block {
+    display: block !important;
+  }
+  .print\:flex {
+    display: flex !important;
+  }
+
+  /* Reset layout */
+  body {
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+  }
+
+  main {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Page breaks at section boundaries */
+  section {
+    page-break-inside: avoid;
+  }
+
+  h2 {
+    page-break-after: avoid;
+  }
+
+  h2.text-2xl {
+    page-break-before: auto;
+  }
+
+  section + section {
+    page-break-before: auto;
+  }
+
+  /* Make sure headings don't get orphaned */
+  h2, h3, h4 {
+    page-break-after: avoid;
+    orphans: 3;
+    widows: 3;
+  }
+
+  p, li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* QR codes remain in print */
+  .print\:border-gray-300 {
+    border-color: #d1d5db !important;
+  }
+
+  /* Reduce spacing */
+  .space-y-12 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 1.5rem;
+  }
+
+  /* Links */
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  /* Tables */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #000;
+    padding: 4px 6px;
+    text-align: left;
+  }
+
+  /* Module header */
+  .rounded-xl {
+    border-radius: 0 !important;
+  }
+}
